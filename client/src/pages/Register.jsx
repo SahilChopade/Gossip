@@ -23,19 +23,24 @@ function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (handleValidation()) {
-      const { password , userName, email } = values;
-      const { data } = await axios.post(registerRoute, {
-        userName,
-        email,
-        password,
-      });
-      if(data.status===false){
-        toast.error(data.msg,toastOptions);
-      }
-      if(data.status){
-        toast.success("Registered Successfully!!",toastOptions);
-        navigate("/");
-      }
+      const { password, userName, email } = values;
+      axios
+        .post(registerRoute, {
+          userName,
+          email,
+          password,
+        })
+        .then((res) => {
+          const id = res.data.user._id;
+          if (res.data.status === false) {
+            toast.error(res.data.msg, toastOptions);
+          }
+          if (res.data.status) {
+            localStorage.setItem('chatUser',JSON.stringify(res.data.user));
+            toast.success("Registered Successfully!!", toastOptions);
+            navigate("/setAvatar");
+          }
+        });
     }
   };
   const handleValidation = (e) => {

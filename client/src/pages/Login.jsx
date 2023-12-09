@@ -50,6 +50,11 @@ function Login() {
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+  useEffect(()=>{
+    if(localStorage.getItem('chatUser')){
+      navigate("/");
+    }
+  },[]);
   return (
     <>
       <FormContainer>
