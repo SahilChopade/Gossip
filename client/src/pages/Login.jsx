@@ -50,40 +50,46 @@ function Login() {
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
-  useEffect(()=>{
-    if(localStorage.getItem('chatUser')){
-      navigate("/");
-    }
-  },[]);
+  useEffect(() => {
+    // if (localStorage.getItem("chatUser")) {
+    //   navigate("/");
+    // }
+  }, []);
   return (
     <>
       <FormContainer>
-        <form onSubmit={(event) => handleSubmit(event)}>
-          <div className="brand">
-            <h1>Gossip</h1>
-          </div>
-          <input
-            className="border-[1px] border-black"
-            type="text"
-            placeholder="userName"
-            name="userName"
-            onChange={(e) => handleChange(e)}
-            min="3"
-          />
-          <input
-            className="border-[1px] border-black"
-            type="password"
-            placeholder="Password"
-            name="password"
-            onChange={(e) => handleChange(e)}
-          />
-          <button className="border-[1px] border-black" type="submit">
-            Login
-          </button>
-          <span>
-            Don't have account?<Link to="/register">Register Here</Link>
-          </span>
-        </form>
+        <div className="flex items-center justify-end h-screen mr-[200px]">
+          <form
+            className="flex flex-col gap-4 w-1/4 p-5 text-white text-center backdrop-blur-[1px] border-[1px] rounded-md"
+            onSubmit={(event) => handleSubmit(event)}
+          >
+            <div className="text-[20px] tracking-wider font-bold">LOGIN</div>
+            <input
+              className="border-[1px] border-black rounded-[100px] p-[5px] px-[10px] bg-transparent placeholder-white"
+              type="text"
+              placeholder="Username"
+              name="userName"
+              onChange={(e) => handleChange(e)}
+              min="3"
+            />
+            <input
+              className="border-[1px] border-black rounded-[100px] p-[5px] px-[10px] bg-transparent placeholder-white"
+              type="password"
+              placeholder="Password"
+              name="password"
+              onChange={(e) => handleChange(e)}
+            />
+            <button
+              className="border-[1px] border-black p-[5px] tracking-wider font-bold text-white rounded-[100px] hover:bg-black transition ease-in-out duration-300"
+              type="submit"
+            >
+              Login
+            </button>
+            <span>
+              Don't have account?<Link className="ml-[5px]" to="/register">Register Here</Link>
+            </span>
+          </form>
+        </div>  
       </FormContainer>
       <ToastContainer />
     </>
